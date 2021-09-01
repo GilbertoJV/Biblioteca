@@ -11,5 +11,12 @@ class ListLibros(ListView):
 
     def get_queryset(self):
         palabra_clave = self.request.GET.get("kword", '')
+        #fecha 1
+        f1 = self.request.GET.get("fecha1", '')
+        #fecha 2
+        f2 = self.request.GET.get("fecha2", '')
 
-        return Libros.objects.listar_libros(palabra_clave)
+        if f1 and f2:
+            return Libro.objects.listar_libros2(palabra_clave,f1,f2)
+        else:
+            return Libro.objects.listar_libros(palabra_clave)
