@@ -9,3 +9,6 @@ class LibroManager(models.Manager):
     def listar_libros2(self,kword,fecha1,fecha2):
         resultado = self.filter(titulo__icontains = kword, fecha__range=(fecha1,fecha2))
         return resultado
+
+    def listar_libros_categoria(self, categoria):
+        return self.filter(categoria__id=categoria).order_by('titulo')
