@@ -12,7 +12,7 @@ class Categoria(models.Model):
 
 
 class Libro(models.Model):
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name='categoria_libro')
     autores = models.ManyToManyField(Autor)
     titulo = models.CharField(max_length=50)
     fecha = models.DateField('Fecha de lanzamiento')

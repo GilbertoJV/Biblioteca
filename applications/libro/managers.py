@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, Count
 
 class LibroManager(models.Manager):
     def listar_libros(self,kword):
@@ -12,3 +12,13 @@ class LibroManager(models.Manager):
 
     def listar_libros_categoria(self, categoria):
         return self.filter(categoria__id=categoria).order_by('titulo')
+
+    def libro_num_prestamos(self):
+        resultado = self.aggregate(num_prestamos=Count('libro_prestamo'))
+
+        return resultado
+
+
+class CategoriaManager(models.Manager):
+    def categoria_por_autor(self, autor):
+        return self.filter(categoria_libro__autores__id=autor)
